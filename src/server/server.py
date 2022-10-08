@@ -9,7 +9,7 @@ class Server:
             self.app,
             default="Endpoints",
             default_label="from API",
-            version="v0.1.0",
+            version="v0.1.1",
             title="Grupo SBF Challenge API",
             doc="/docs"
         )

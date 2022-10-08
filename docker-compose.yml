@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build:
+        context: .
+    ports:
+      - "8465:8465"
+    volumes:
+      - ./src:/src

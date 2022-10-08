@@ -5,7 +5,11 @@ from .config import config
 
 class Converter:
     @staticmethod
-    def convert(amount, *currencies):
+    def convert(amount, *currencies) -> dict:
+        """
+        Receives the amount, and dynamically receives the currencies
+        for making the covertion from BRL
+        """
         current_date = str(date.today())
         api_key = config.currency_api_key
         from_currency = "BRL"
@@ -26,7 +30,7 @@ class Converter:
                   f"amount={str(amount)}&" \
                   f"format={response_format}"
 
-            response = requests.get(url, verify=False)
+            response = requests.get(url)
 
             if response.status_code == 200:
                 data = response.json()
@@ -38,4 +42,4 @@ class Converter:
         return converted
 
 
-converter = Converter()
+converter = Converter()  # Converter class sigleton

@@ -1,3 +1,5 @@
+"""Modeling errors output for swagger"""
+
 from flask_restx import fields
 from server import server
 

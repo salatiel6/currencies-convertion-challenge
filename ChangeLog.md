@@ -1,3 +1,6 @@
+> ![](https://img.shields.io/badge/Out_08,_2022-black) ![](https://img.shields.io/badge/v0.2.2-REFACTOR-red)  
+> `Refactored the code for better comprehension. Added some comments and docstrings`
+ 
 > ![](https://img.shields.io/badge/Out_08,_2022-black) ![](https://img.shields.io/badge/v0.2.1-FIX-green)  
 > `Added requests to requirements.txt`
 

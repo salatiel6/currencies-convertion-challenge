@@ -1,7 +1,6 @@
 from server import server
 from flask_restx import Resource, reqparse
-from git import Repo
-from flask import request
+
 from .config import config
 from .converter import converter
 from .error_handlers import ErrorHandlers
@@ -41,16 +40,3 @@ class Convert(Resource):
             return converted_currencies, 200
         else:
             raise MissingArgError("amount")
-
-
-@app.route("/deploy", methods=["POST"])
-def deploy():
-    if request.method == "POST":
-        repo = Repo("./gabriel-salatiel-eng-gruposbf-backend-python")
-
-        origin = repo.remotes.origin
-        origin.pull()
-
-        return "Updated PythonAnywhere successfully", 200
-
-    return "Wrong event type", 400

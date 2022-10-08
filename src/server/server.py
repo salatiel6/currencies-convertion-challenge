@@ -3,19 +3,21 @@ from flask_restx import Api
 
 
 class Server:
+    """Configures flask app and api for building with swagger"""
     def __init__(self) -> None:
         self.app = Flask(__name__)
         self.api = Api(
             self.app,
             default="Endpoints",
             default_label="from API",
-            version="v0.2.1",
+            version="v0.2.2",
             title="Grupo SBF Challenge API",
             doc="/docs"
         )
 
     @staticmethod
-    def run(app):
+    def run(app) -> None:
+        """Runs the application"""
         app.run(
             debug=True,
             host="0.0.0.0",
@@ -23,4 +25,4 @@ class Server:
         )
 
 
-server = Server()
+server = Server()  # Server class sigleton

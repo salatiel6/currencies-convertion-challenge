@@ -1,7 +1,7 @@
 import pytest
 import json
 import sys
-sys.path.insert(1, "../")
+sys.path.insert(1, "../")  # Sets 'src' directory as sources root
 
 from controllers import app  # noqa: E402
 from controllers import converter  # noqa: E402
@@ -10,6 +10,7 @@ from controllers import config  # noqa: E402
 
 @pytest.fixture
 def client():
+    """Starting flask app on testing environment"""
     app.config['TESTING'] = True
     client = app.test_client()
 
@@ -17,6 +18,7 @@ def client():
 
 
 def test_home(client):
+    """Tests if the index page is working"""
     url = "/home"
     result = client.get(url)
 
@@ -24,6 +26,7 @@ def test_home(client):
 
 
 def test_converter_with_one_param(client):
+    """Tests the converter method passing only one currency"""
     amount = 100
     converted_currencie = converter.convert(amount, "USD")
 
@@ -34,6 +37,7 @@ def test_converter_with_one_param(client):
 
 
 def test_convert_route_with_valid_param(client):
+    """Tests the convert route with an accepted param"""
     amount = 100
     url = f"/convert?amount={amount}"
 
@@ -46,6 +50,7 @@ def test_convert_route_with_valid_param(client):
 
 
 def test_convert_route_with_invalid_param(client):
+    """Tests the convert route with an unaccepted param"""
     amount = "asdf"
     url = f"/convert?amount={amount}"
 
@@ -59,6 +64,7 @@ def test_convert_route_with_invalid_param(client):
 
 
 def test_convert_route_with_missing_arg(client):
+    """Tests the convert route without the required url param"""
     url = "/convert"
 
     result = client.get(url)
@@ -66,3 +72,17 @@ def test_convert_route_with_missing_arg(client):
 
     assert result.status_code == 400
     assert response_body["message"] == "Missing arg: 'amount'"
+
+
+def test_convert_route_with_invalid_float_format(client):
+    """Tests the convert route with unaccepted money format"""
+    amount = "599,90"
+    url = f"/convert?amount={amount}"
+
+    result = client.get(url)
+    response_body = json.loads(result.data)
+
+    assert result.status_code == 400
+    assert response_body["message"] == "Input payload validation failed"
+    assert response_body["errors"]["amount"] == \
+           "could not convert string to float: '599,90'"

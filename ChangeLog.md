@@ -1,3 +1,6 @@
+> ![](https://img.shields.io/badge/Out_08,_2022-black) ![](https://img.shields.io/badge/v0.2.1-FIX-green)  
+> `Added requests to requirements.txt`
+
 > ![](https://img.shields.io/badge/Out_08,_2022-black) ![](https://img.shields.io/badge/v0.2.0-FEAT-blue)  
 > `Application is now converting the currencies dynamically. Swagger configured`
 

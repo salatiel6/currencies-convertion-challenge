@@ -33,9 +33,10 @@ class Convert(Resource):
         amount = args["amount"]
 
         if amount:
-            currencies = config.currency_list
+            currencies = config.currencies
 
-            converted_currencies = converter.convert(amount, *currencies)
+            converted_currencies = \
+                converter.convert_with_get_geo_api(amount, *currencies)
 
             return converted_currencies, 200
         else:

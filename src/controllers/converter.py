@@ -4,11 +4,12 @@ from .config import config
 
 
 class Converter:
+    """Class to host all the converters"""
     @staticmethod
-    def convert(amount, *currencies) -> dict:
+    def convert_with_get_geo_api(amount, *currencies) -> dict:
         """
         Receives the amount, and dynamically receives the currencies
-        for making the covertion from BRL
+        for making the covertion from BRL, using the Get Geo API
         """
         current_date = str(date.today())
         api_key = config.currency_api_key

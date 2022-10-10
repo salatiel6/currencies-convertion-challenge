@@ -28,7 +28,7 @@ def test_home(client):
 def test_converter_with_one_param(client):
     """Tests the converter method passing only one currency"""
     amount = 100
-    converted_currencie = converter.convert(amount, "USD")
+    converted_currencie = converter.convert_with_get_geo_api(amount, "USD")
 
     assert converted_currencie["base_currency"] == "BRL"
     assert converted_currencie["amount"] == amount
@@ -46,7 +46,7 @@ def test_convert_route_with_valid_param(client):
 
     assert result.status_code == 200
     assert len(response_body["converted_currencies"]) == \
-           len(config.currency_list)
+           len(config.currencies)
 
 
 def test_convert_route_with_invalid_param(client):
